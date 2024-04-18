@@ -5,6 +5,7 @@ function App() {
   return (
     <div className="App">
 
+      <div className="root">
       <header class="header">
         <img className="header__logo" /*src={require('./images/header/Vector.svg')}*/ alt="logo around the U.S"/>
         <hr className="header__line"/>
@@ -77,7 +78,7 @@ function App() {
         </div>
       </div>
 
-      <div className="popup popup_opened form" id="popup_container" >
+      <div className="popup popup-opened form" id="popup_container" >
         <div className="popup__group">
           <h2 className="popup__icon-close popup__icon-close:hover">+</h2>
           <form name="profile" className="popup__container form__popup" id="form" noValidate>
@@ -138,6 +139,7 @@ function App() {
             <button className="popup-save popup-place__button-save popup-place__button-save:hover">Guardar</button>
           </form>
         </div>
+      </div>
       </div>
 
     </div>
