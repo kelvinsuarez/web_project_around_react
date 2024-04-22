@@ -1,6 +1,6 @@
 import React from 'react';
 import Header from './Header';
-import Profile from './Profile';
+import Main from './Main';
 import Footer from './Footer';
 
 
@@ -10,9 +10,8 @@ function App() {
 
       <div className="root">
         < Header />
-        < Profile />
-
-        <section className="cards"></section>
+        
+        < Main />
 
         <Footer/>
 
