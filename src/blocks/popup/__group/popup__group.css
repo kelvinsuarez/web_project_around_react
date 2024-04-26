@@ -1,4 +1,4 @@
-.popup__group{
+.popup-profile__group{
     position: relative;
     position: fixed;
     display: -webkit-box;
@@ -20,14 +20,14 @@
 }
 
 @media screen and (max-width: 768px) {
-    .popup__group{
+    .popup-profile__group{
         height: 230px;
         top: 100px;
     }
 }
 
 @media screen and (max-width: 320px) {
-    .popup__group{
+    .popup-profile__group{
         height: 200px;
         width: 60%;
         margin-left: 23px;

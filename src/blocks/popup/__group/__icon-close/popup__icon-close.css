@@ -1,4 +1,4 @@
-.popup__icon-close{
+.popup-profile__icon-close{
     position: absolute;
     display: flex;
     justify-content: center;
@@ -14,7 +14,7 @@
     transform: rotate(45deg);
 }
 
-.popup__icon-close:hover{
+.popup-profile__icon-close:hover{
    color: rgba(255, 255, 255, 0.6);
     cursor: pointer;
 }

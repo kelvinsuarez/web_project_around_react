@@ -1,4 +1,4 @@
-.popup__imput-text{
+.popup-profile__imput-text{
     border: none;
     width: 83%;
     height: 7%;
@@ -25,7 +25,7 @@
 }
 
 @media screen and (max-width: 768px) {
-    .popup__imput-text{
+    .popup-profile__imput-text{
         font-size: 10px;
     }
 }
