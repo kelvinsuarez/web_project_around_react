@@ -10,9 +10,11 @@ function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(true);
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(true);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(true);
+  const [isConfirmacionPopupOpen, setIsConfirmacionPopupOpen] = React.useState(true);
 
   const handleEditAvatarClick = () => {
     setIsEditAvatarPopupOpen(false);
+    
   }
 
   const handleEditProfileClick = () => {
@@ -23,9 +25,19 @@ function App() {
     setIsAddPlacePopupOpen(false)
   }
 
+  const handleConfirmationClick =() => {
+    setIsConfirmacionPopupOpen(false)
+  }
+
   const onCardClick = () => {
     const imageZoom = document.querySelector(".image-zoom");
     imageZoom.classList.remove("image-zoom_opened")
+  }
+
+  const closeAllPopups = () => {
+    setIsEditAvatarPopupOpen(true);
+    setIsEditProfilePopupOpen(true);
+    setIsAddPlacePopupOpen(true);
   }
 
   return (
@@ -43,11 +55,11 @@ function App() {
 
         <Footer/>
 
-        <PopupWithForm isOpen={true} name="-confirmation" id="" title="¿Estas seguro/a?">
+        <PopupWithForm isOpen={isConfirmacionPopupOpen} onClose={closeAllPopups} name="-confirmation" id="" title="¿Estas seguro/a?">
           <button className="popup-confirmation__button-delete">si</button>
         </PopupWithForm>
 
-        <PopupWithForm isOpen={isEditAvatarPopupOpen} name="-image-profile" id="popup-image-profile_container" title="Cambiar foto de perfil">
+        <PopupWithForm isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} name="-image-profile" id="popup-image-profile_container" title="Cambiar foto de perfil">
           <input 
             type="url"
             id="url-profile"
@@ -64,7 +76,7 @@ function App() {
 
         <ImagePopup/>
 
-        <PopupWithForm isOpen={isEditProfilePopupOpen} name="-profile" id="popup-profile_container" title="Editar Perfil">
+        <PopupWithForm isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} name="-profile" id="popup-profile_container" title="Editar Perfil">
           <input 
             type="text" 
             id="nombre"
@@ -92,7 +104,7 @@ function App() {
           <button className="popup-save popup-profile__button-save popup-profile__button-save:hover" id="button-save">Guardar</button>
         </PopupWithForm>
 
-        <PopupWithForm isOpen={isAddPlacePopupOpen} name="-place" id="popup-place_container" title="Nuevo Lugar">
+        <PopupWithForm isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} name="-place" id="popup-place_container" title="Nuevo Lugar">
           <input 
             type="text"
             id="titulo"
