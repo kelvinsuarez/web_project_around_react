@@ -1,26 +1,53 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
 import PopupWithForm from './PopupWithForm';
+import ImagePopup from './ImagePopup';
 
 
 function App() {
+  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(true);
+  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(true);
+  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(true);
+
+  const handleEditAvatarClick = () => {
+    setIsEditAvatarPopupOpen(false);
+  }
+
+  const handleEditProfileClick = () => {
+    setIsEditProfilePopupOpen(false)
+  }
+
+  const handleAddPlaceClick = () => {
+    setIsAddPlacePopupOpen(false)
+  }
+
+  const onCardClick = () => {
+    const imageZoom = document.querySelector(".image-zoom");
+    imageZoom.classList.remove("image-zoom_opened")
+  }
+
   return (
     <div className="App">
 
       <div className="root">
         < Header />
         
-        < Main />
+        < Main 
+          onEditProfileClick={handleEditProfileClick} 
+          onAddPlaceClick={handleAddPlaceClick} 
+          onEditAvatarClick={handleEditAvatarClick}
+          onCardClick={onCardClick}
+        />
 
         <Footer/>
 
-        <PopupWithForm name="-confirmation" id="" title="¿Estas seguro/a?">
+        <PopupWithForm isOpen={true} name="-confirmation" id="" title="¿Estas seguro/a?">
           <button className="popup-confirmation__button-delete">si</button>
         </PopupWithForm>
 
-        <PopupWithForm name="-image-profile" id="popup-image-profile_container" title="Cambiar foto de perfil">
+        <PopupWithForm isOpen={isEditAvatarPopupOpen} name="-image-profile" id="popup-image-profile_container" title="Cambiar foto de perfil">
           <input 
             type="url"
             id="url-profile"
@@ -35,16 +62,9 @@ function App() {
           <button className="popup-save popup-image-profile__button-save popup-image-profile__button-save:hover">Guardar</button>
         </PopupWithForm>
 
-      
-        <div className="image-zoom image-zoom_opened" id="image-zoom_container" >
-          <div className="image-zoom__group">
-            <span className="image-zoom__icon-close image-zoom__icon-close:hover">+</span>
-            <img className="image-zoom__container" src="https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/yosemite.jpg" alt="imagen agrandada"/>
-            <h2 className="image-zoom__text">Aqui estoy</h2>
-          </div>
-        </div>
+        <ImagePopup/>
 
-        <PopupWithForm name="-profile" id="popup-profile_container" title="Editar Perfil">
+        <PopupWithForm isOpen={isEditProfilePopupOpen} name="-profile" id="popup-profile_container" title="Editar Perfil">
           <input 
             type="text" 
             id="nombre"
@@ -72,7 +92,7 @@ function App() {
           <button className="popup-save popup-profile__button-save popup-profile__button-save:hover" id="button-save">Guardar</button>
         </PopupWithForm>
 
-        <PopupWithForm name="-place" id="popup-place_container" title="Nuevo Lugar">
+        <PopupWithForm isOpen={isAddPlacePopupOpen} name="-place" id="popup-place_container" title="Nuevo Lugar">
           <input 
             type="text"
             id="titulo"
