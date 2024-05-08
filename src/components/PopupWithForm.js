@@ -1,7 +1,26 @@
-import React from "react";
-
+import React, { useEffect } from "react";
 
 function PopupWithForm(props) {
+    useEffect(() =>{
+       const handleEscClose = (evt) => {
+            if (evt.key == 'Escape'){
+                props.onClose()
+            }
+        };
+
+        const handleClickOutside = (evt) => {
+            if (evt.target === document.querySelector(`.popup${props.name}`)){
+                props.onClose();
+            }
+        };
+
+        document.addEventListener("keydown", handleEscClose);
+        document.addEventListener("click", handleClickOutside);
+        return () => {
+            document.removeEventListener("keydown", handleEscClose);
+            document.addEventListener("click", handleClickOutside);
+        }
+    }, [])
     return (
         <div className={`popup${props.name} ${props.isOpen ? "popup-opened" : ""} form`} id={props.id}>
             <div className={`popup${props.name}__group`}>
