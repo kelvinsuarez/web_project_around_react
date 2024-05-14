@@ -3,7 +3,7 @@ import Logo from '../images/header/Vector.svg';
 
 function Header() {
     return (
-        <header class="header">
+        <header className="header">
           <img className="header__logo" src={Logo} alt="logo around the U.S"/>
           <hr className="header__line"/>
         </header>

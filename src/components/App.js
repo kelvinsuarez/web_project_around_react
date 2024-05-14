@@ -65,7 +65,7 @@ function App() {
             id="url-profile"
             placeholder="Imagen URL"
             minLength="2" maxLength="200"
-            value=""
+            defaultValue=""
             className="popup-image-profile__imput-text form-imput-text"
             required
             autoComplete="off"
@@ -81,9 +81,9 @@ function App() {
             type="text" 
             id="nombre"
             name="nombre"
-            placeHolder="Nombre" 
-            value="Jacques Cousteau" 
-            minLength="2" maxlength="40" 
+            placeholder="Nombre" 
+            defaultValue="Jacques Cousteau" 
+            minLength="2" maxLength="40" 
             className="popup-profile__imput-text popup-profile__imput-text_name form__imput-text"
             required
             autoComplete="off"
@@ -94,8 +94,8 @@ function App() {
             id="acerca"
             name="acerca"
             placeholder="A cerca de mi"
-            value="Explorador"
-            minlength="2" maxlength="200"
+            defaultValue="Explorador"
+            minLength="2" maxLength="200"
             className="popup-profile__imput-text popup-profile__imput-text_job form__imput-text"
             required
             autoComplete="off"
@@ -110,7 +110,7 @@ function App() {
             id="titulo"
             placeholder="Titulo"
             minLength="2" maxLength="30"
-            value=""
+            defaultValue=""
             className="popup-place__imput-text popup-place__imput-text_title form-imput-text"
             required
             autoComplete="off"
@@ -120,7 +120,7 @@ function App() {
             id="url"
             placeholder="Imagen URL"
             minLength="2" maxLength="200"
-            value=""
+            defaultValue=""
             className="popup-place__imput-text popup-place__imput-text_image form-imput-text"
             required
             autoComplete="off"

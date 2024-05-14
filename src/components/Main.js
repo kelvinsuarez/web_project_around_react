@@ -8,6 +8,7 @@ function Main(props) {
     const [userName, setUserName] = React.useState();
     const [userDescription, setUserDescription] = React.useState();
     const [userAvatar, setUserAvatar] = React.useState();
+    const [cards, setCards] = React.useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -16,6 +17,10 @@ function Main(props) {
                 setUserName(userData.name);
                 setUserDescription(userData.about);
                 setUserAvatar(userData.avatar);
+
+                const cardInfo = await api.getCards();
+                setCards(cardInfo)
+                
             } catch (error) {
                 console.error("Error fetching user data:", error);
             }
@@ -48,7 +53,36 @@ function Main(props) {
                 </div>
             </section>
 
-            <section className="cards"></section>
+            <section className="cards">
+                
+                {cards.map(cardIten => (
+      // Este es un atributo importante: `key`
+      <template id="cards-template" className="cards-template" key={cardIten._id}>
+            <div className="cards__element">
+                <img className="cards__element-pic" src={cardIten.link} alt="carta de paisaje"/>
+                
+                <img className="cards__element-trash cards__element-trash:hover"  alt="basurero"/>
+                
+                <div className="cards__element-text-container">
+                    <h2 className="cards__element-text">
+                    {cardIten.name}
+                    </h2>
+                    <div className="cards__element-like cards__element-like:hover" >
+                        <img  alt="vector corazon"/>
+                        <div className="cards__element-like-black cards__element-like-black_on">
+                            <div className="cards__element-like-right-rectangle cards__element-like-parts"></div>
+                            <div className="cards__element-like-left-rectangle cards__element-like-parts"></div>
+                            <div className="cards__element-like-right-circle cards__element-like-parts"></div>
+                            <div className="cards__element-like-left-circle cards__element-like-parts"></div>
+                            <div className="cards__element-like-center-circle cards__element-like-parts"></div>
+                        </div>
+                    </div>
+                    <span className="cards__element-like-counter"></span>
+                </div>
+            </div>
+        </template>
+    ))}
+            </section>
         </>
     )
 }
