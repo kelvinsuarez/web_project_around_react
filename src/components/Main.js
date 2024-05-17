@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import VectorLapiz  from '../images/profile/lapiz.svg';
 import VectorCruz  from '../images/profile/button-add.svg';
+import Trash from '../images/cards/trash-all.svg'
+import likePick from '../images/cards/like-grey.svg'
 import {api} from '../utils/api.js'
 
 function Main(props) {
@@ -27,7 +29,7 @@ function Main(props) {
         };
         fetchData();
     }, []);
-
+ console.log(cards)
     return (
         <>
             <section className="profile">
@@ -57,18 +59,17 @@ function Main(props) {
                 
                 {cards.map(cardIten => (
       // Este es un atributo importante: `key`
-      <template id="cards-template" className="cards-template" key={cardIten._id}>
-            <div className="cards__element">
+            <div className="cards__element" key={cardIten._id}>
                 <img className="cards__element-pic" src={cardIten.link} alt="carta de paisaje"/>
                 
-                <img className="cards__element-trash cards__element-trash:hover"  alt="basurero"/>
+                <img className="cards__element-trash cards__element-trash:hover" src={Trash} alt="basurero"/>
                 
                 <div className="cards__element-text-container">
                     <h2 className="cards__element-text">
                     {cardIten.name}
                     </h2>
                     <div className="cards__element-like cards__element-like:hover" >
-                        <img  alt="vector corazon"/>
+                        <img src={likePick} alt="vector corazon"/>
                         <div className="cards__element-like-black cards__element-like-black_on">
                             <div className="cards__element-like-right-rectangle cards__element-like-parts"></div>
                             <div className="cards__element-like-left-rectangle cards__element-like-parts"></div>
@@ -77,10 +78,9 @@ function Main(props) {
                             <div className="cards__element-like-center-circle cards__element-like-parts"></div>
                         </div>
                     </div>
-                    <span className="cards__element-like-counter"></span>
+                    <span className="cards__element-like-counter" >{cardIten.likes ? cardIten.likes.length : ""}</span>
                 </div>
             </div>
-        </template>
     ))}
             </section>
         </>
