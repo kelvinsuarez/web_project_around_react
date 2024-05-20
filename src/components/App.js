@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import Header from './Header';
 import Main from './Main';
+import Card from './Card';
 import Footer from './Footer';
 import PopupWithForm from './PopupWithForm';
 import ImagePopup from './ImagePopup';
+
 
 
 function App() {
@@ -50,6 +52,9 @@ function App() {
           onEditProfileClick={handleEditProfileClick} 
           onAddPlaceClick={handleAddPlaceClick} 
           onEditAvatarClick={handleEditAvatarClick}
+        />
+
+        < Card
           onCardClick={onCardClick}
         />
 
