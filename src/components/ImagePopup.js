@@ -1,15 +1,17 @@
-import React from "react";
+import React, {} from "react";
 
-function ImagePopup () {
+function PopupWithForm(props) {
+    
     return (
-        <div className="image-zoom image-zoom_opened" id="image-zoom_container" >
-          <div className="image-zoom__group">
-            <span className="image-zoom__icon-close image-zoom__icon-close:hover">+</span>
-            <img className="image-zoom__container" src="https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/yosemite.jpg" alt="imagen agrandada"/>
-            <h2 className="image-zoom__text">Aqui estoy</h2>
-          </div>
+        <div className={`popup${props.name} ${props.isOpen ? "popup-opened" : ""} form`} id={props.id}>
+            <div className={`popup${props.name}__group`}>
+                <h2 className={`popup${props.name}__icon-close popup${props.name}__icon-close:hover`} onClick={props.onClose}>+</h2>
+                <form name={props.name} className={`popup${props.name}__container form-popup`} noValidate>
+                    <h2 className={`popup${props.name}__text`} >{props.title}</h2>
+                </form>
+            </div>
         </div>
     )
 }
 
-export default ImagePopup
+export default PopupWithForm

@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import Header from './Header';
 import Main from './Main';
-import Card from './Card';
 import Footer from './Footer';
 import PopupWithForm from './PopupWithForm';
 import ImagePopup from './ImagePopup';
+import {api} from '../utils/api.js'
 
 
 
@@ -13,6 +13,33 @@ function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(true);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(true);
   const [isConfirmacionPopupOpen, setIsConfirmacionPopupOpen] = React.useState(true);
+  const [selectedCard, setSelectedCard] = React.useState(true)
+  
+  
+  const [userName, setUserName] = React.useState();
+  const [userDescription, setUserDescription] = React.useState();
+  const [userAvatar, setUserAvatar] = React.useState();
+  const [currentUser, setCurrentUser] = React.useState();
+  const [cards, setCards] = React.useState([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+              const userData = await api.getUserInfoFronServer();
+              setUserName(userData.name);
+              setUserDescription(userData.about);
+              setUserAvatar(userData.avatar);
+              setCurrentUser(userData._id)
+
+              const cardInfo = await api.getCards();
+              setCards(cardInfo)
+                
+            } catch (error) {
+                console.error("Error fetching user data:", error);
+            }
+        };
+        fetchData();
+    }, []);
 
   const handleEditAvatarClick = () => {
     setIsEditAvatarPopupOpen(false);
@@ -31,15 +58,15 @@ function App() {
     setIsConfirmacionPopupOpen(false)
   }
 
-  const onCardClick = () => {
-    const imageZoom = document.querySelector(".image-zoom");
-    imageZoom.classList.remove("image-zoom_opened")
+  const handleCardClick = () => {
+    setSelectedCard(false);
   }
 
   const closeAllPopups = () => {
     setIsEditAvatarPopupOpen(true);
     setIsEditProfilePopupOpen(true);
     setIsAddPlacePopupOpen(true);
+    
   }
 
   return (
@@ -52,15 +79,27 @@ function App() {
           onEditProfileClick={handleEditProfileClick} 
           onAddPlaceClick={handleAddPlaceClick} 
           onEditAvatarClick={handleEditAvatarClick}
-        />
+          onCardClick={handleCardClick}
+          cards={cards}
+          userId={currentUser}
+          api={api}
+          userName={userName}
+          userDescription={userDescription}
+          userAvatar={userAvatar}
+          image
 
-        < Card
-          onCardClick={onCardClick}
         />
 
         <Footer/>
 
-        <PopupWithForm isOpen={isConfirmacionPopupOpen} onClose={closeAllPopups} name="-confirmation" id="" title="¿Estas seguro/a?">
+        <PopupWithForm 
+          isOpen={handleConfirmationClick} 
+          onClose={closeAllPopups} 
+          name="-confirmation" 
+          id="" 
+          title="¿Estas seguro/a?"
+        
+        >
           <button className="popup-confirmation__button-delete">si</button>
         </PopupWithForm>
 
@@ -78,8 +117,6 @@ function App() {
           <span className="url-profile-error form-input-show-error"></span>
           <button className="popup-save popup-image-profile__button-save popup-image-profile__button-save:hover">Guardar</button>
         </PopupWithForm>
-
-        <ImagePopup/>
 
         <PopupWithForm isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} name="-profile" id="popup-profile_container" title="Editar Perfil">
           <input 
