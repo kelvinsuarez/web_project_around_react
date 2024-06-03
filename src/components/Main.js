@@ -3,28 +3,38 @@ import VectorLapiz  from '../images/profile/lapiz.svg';
 import VectorCruz  from '../images/profile/button-add.svg';
 import Card from './Card.js';
 
-function Main(props) {
-
+function Main({ onEditProfileClick, 
+                onAddPlaceClick, 
+                onEditAvatarClick, 
+                onCardClick, 
+                cards, 
+                userId, 
+                api, 
+                userAvatar, 
+                userName, 
+                userDescription, 
+                onConfirmationDelete }) {
+    
     return (
         <>
             <section className="profile">
                 <div className="profile__avatar">
                     <div className="profile__elipce">
                         <div className="profile__image-edit">
-                            <img className="profile__edit-image-button-vector" src={VectorLapiz} onClick={props.onEditAvatarClick}/>
+                            <img className="profile__edit-image-button-vector" src={VectorLapiz} onClick={onEditAvatarClick}/>
                         </div>
-                        <img className="profile__image"  style={{ backgroundImage: `url(${props.userAvatar})` }}/>
+                        <img className="profile__image"  style={{ backgroundImage: `url(${userAvatar})` }}/>
                     </div>
                 </div>
                 <div className="profile__into">
-                    <h2 className="profile__title">{props.userName}</h2>
-                    <div className="profile__edit-button-square profile__edit-button-square_grey" onClick={props.onEditProfileClick}> </div>
+                    <h2 className="profile__title">{userName}</h2>
+                    <div className="profile__edit-button-square profile__edit-button-square_grey" onClick={onEditProfileClick}> </div>
                     <div className="profile__edit-button-square" id="edit-button">
                         <img className="profile__edit-button-vector" src={VectorLapiz} alt="imagen de silueta de lapiz"/>
                     </div>
-                    <h3 className="profile__subtitle">{props.userDescription}</h3> 
+                    <h3 className="profile__subtitle">{userDescription}</h3> 
                 </div>
-                <div className="profile__add-button profile__add-button_grey" onClick={props.onAddPlaceClick}> </div>
+                <div className="profile__add-button profile__add-button_grey" onClick={onAddPlaceClick}> </div>
                 <div className="profile__add-button profile__add-button:hover">
                     <img className="profile__add-button-cross" src={VectorCruz} alt="cruz"/>
                 </div>
@@ -32,15 +42,20 @@ function Main(props) {
 
             <section className="cards">
                 
-                {props.cards.map((cardIten) => (
-                     <Card
-                        key={cardIten._id}
-                        card={cardIten}
-                        api={props.api}
-                        userId={props.userId}
-                        popupConfirmation={props.PopupWithForm}
-                    />
-                ))}
+                {cards.map((cardItem) => {
+                    const canBeDelete = cardItem.owner._id === userId;
+                    console.log('CardItem:', cardItem);
+                    console.log('CanBeDelete:', canBeDelete);
+                    return(<Card
+                        key={cardItem._id}
+                        canBeDelete= {canBeDelete}
+                        card={cardItem}
+                        api={api}
+                        userId={userId}
+                        onConfirmationDelete={onConfirmationDelete} 
+                        handleCardClick={onCardClick}
+                    />)
+                })}
             </section>
 
         </>

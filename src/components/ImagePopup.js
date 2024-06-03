@@ -1,17 +1,38 @@
-import React, {} from "react";
+import React, {useEffect} from "react";
 
-function PopupWithForm(props) {
+function ImagePopup({isOpen, card, onClose}) {
+
+  useEffect(()=>{
+    const handleEscClose = (evt) => {
+      if (evt.key == 'Escape'){
+        onClose()
+      }
+    };
+    const handleClickOutside = (evt) => {
+      if (evt.target === document.querySelector(`.image-zoom`)){
+        onClose();
+      }
+    };
+
+    document.addEventListener('keydown', handleEscClose)
+    document.addEventListener('click', handleClickOutside)
+    return () => {
+      document.removeEventListener('keydown', handleEscClose)
+      document.removeEventListener('click', handleClickOutside)
+    }
+  },[onClose]);
     
+    if (!card) return null;
+
     return (
-        <div className={`popup${props.name} ${props.isOpen ? "popup-opened" : ""} form`} id={props.id}>
-            <div className={`popup${props.name}__group`}>
-                <h2 className={`popup${props.name}__icon-close popup${props.name}__icon-close:hover`} onClick={props.onClose}>+</h2>
-                <form name={props.name} className={`popup${props.name}__container form-popup`} noValidate>
-                    <h2 className={`popup${props.name}__text`} >{props.title}</h2>
-                </form>
+        <div className={`image-zoom ${isOpen ? "image-zoom_opened" : ""} form`}>
+            <div className={`image-zoom__group`}>
+                <h2 className={`image-zoom__icon-close image-zoom__icon-close:hover`} onClick={onClose}>+</h2>
+                <img className="image-zoom__container" src={card.link} alt={card.name}/>
+                    <h2 className={`image-zoom__text`} >{card.name}</h2>
             </div>
         </div>
     )
 }
 
-export default PopupWithForm
+export default ImagePopup

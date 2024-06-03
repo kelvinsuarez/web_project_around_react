@@ -18,9 +18,9 @@ function PopupWithForm(props) {
         document.addEventListener("click", handleClickOutside);
         return () => {
             document.removeEventListener("keydown", handleEscClose);
-            document.addEventListener("click", handleClickOutside);
+            document.removeEventListener("click", handleClickOutside);
         }
-    }, [])
+    }, [props])
     return (
         <div className={`popup${props.name} ${props.isOpen ? "popup-opened" : ""} form`} id={props.id}>
             <div className={`popup${props.name}__group`}>

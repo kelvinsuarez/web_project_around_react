@@ -13,7 +13,8 @@ function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(true);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(true);
   const [isConfirmacionPopupOpen, setIsConfirmacionPopupOpen] = React.useState(true);
-  const [selectedCard, setSelectedCard] = React.useState(true)
+  const [isOpenImagePopup, setIsOpenImagePopup] = React.useState(true);
+  const [selectedCard, setSelectedCard] = React.useState(null)
   
   
   const [userName, setUserName] = React.useState();
@@ -54,20 +55,33 @@ function App() {
     setIsAddPlacePopupOpen(false)
   }
 
-  const handleConfirmationClick =() => {
+  const handleConfirmationClick =(card) => {
+    setSelectedCard(card);
     setIsConfirmacionPopupOpen(false)
   }
 
-  const handleCardClick = () => {
-    setSelectedCard(false);
+  const handleCardClick = (card) => {
+    setSelectedCard(card);
+    setIsOpenImagePopup(false)
   }
 
   const closeAllPopups = () => {
     setIsEditAvatarPopupOpen(true);
     setIsEditProfilePopupOpen(true);
     setIsAddPlacePopupOpen(true);
-    
+    setIsConfirmacionPopupOpen(true);
+    setIsOpenImagePopup(true)
   }
+
+  const handleCardDelete = async () => {
+    try {
+      await api.deleteCardFromServer(selectedCard._id);
+      
+      closeAllPopups();
+    } catch (error) {
+      console.error ("error deleting card", error);
+    }
+  };
 
   return (
     <div className="App">
@@ -86,21 +100,27 @@ function App() {
           userName={userName}
           userDescription={userDescription}
           userAvatar={userAvatar}
-          image
-
+          onConfirmationDelete={handleConfirmationClick}
         />
 
         <Footer/>
 
+        <ImagePopup
+          isOpen={isOpenImagePopup}
+          card={selectedCard}
+          onClose={closeAllPopups}
+          
+        />
+
         <PopupWithForm 
-          isOpen={handleConfirmationClick} 
+          isOpen={isConfirmacionPopupOpen} 
           onClose={closeAllPopups} 
           name="-confirmation" 
           id="" 
           title="¿Estas seguro/a?"
         
         >
-          <button className="popup-confirmation__button-delete">si</button>
+          <button className="popup-confirmation__button-delete" onClick={handleCardDelete}>si</button>
         </PopupWithForm>
 
         <PopupWithForm isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} name="-image-profile" id="popup-image-profile_container" title="Cambiar foto de perfil">
