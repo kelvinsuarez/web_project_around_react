@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/web_project_around_react/static/css/main.3e09da27.css",
+    "main.js": "/web_project_around_react/static/js/main.6decbc32.js",
+    "static/js/453.8d428687.chunk.js": "/web_project_around_react/static/js/453.8d428687.chunk.js",
+    "static/media/Inter-Regular.otf": "/web_project_around_react/static/media/Inter-Regular.a416f4674fad5f019461.otf",
+    "static/media/Vector.svg": "/web_project_around_react/static/media/Vector.4e8e0a1d604782a0dff8e5b1a5441e4d.svg",
+    "index.html": "/web_project_around_react/index.html",
+    "static/media/trash-all.svg": "/web_project_around_react/static/media/trash-all.87d975fd9fd9407df7bf183f4f41d4a5.svg",
+    "static/media/like-grey.svg": "/web_project_around_react/static/media/like-grey.15efd1e2adeca6637df874827f43c26d.svg",
+    "static/media/lapiz.svg": "/web_project_around_react/static/media/lapiz.2bae980a4cb789c0718e2bca1c4f40ef.svg",
+    "static/media/button-add.svg": "/web_project_around_react/static/media/button-add.d86bb2edc2f6eadb96b785d29c82b56e.svg",
+    "main.3e09da27.css.map": "/web_project_around_react/static/css/main.3e09da27.css.map",
+    "main.6decbc32.js.map": "/web_project_around_react/static/js/main.6decbc32.js.map",
+    "453.8d428687.chunk.js.map": "/web_project_around_react/static/js/453.8d428687.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.3e09da27.css",
+    "static/js/main.6decbc32.js"
+  ]
+}
