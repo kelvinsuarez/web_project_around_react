@@ -144,7 +144,7 @@ function App() {
             id="nombre"
             name="nombre"
             placeholder="Nombre" 
-            defaultValue="Jacques Cousteau" 
+            defaultValue={userName}
             minLength="2" maxLength="40" 
             className="popup-profile__imput-text popup-profile__imput-text_name form__imput-text"
             required
@@ -156,7 +156,7 @@ function App() {
             id="acerca"
             name="acerca"
             placeholder="A cerca de mi"
-            defaultValue="Explorador"
+            defaultValue={userDescription}
             minLength="2" maxLength="200"
             className="popup-profile__imput-text popup-profile__imput-text_job form__imput-text"
             required
