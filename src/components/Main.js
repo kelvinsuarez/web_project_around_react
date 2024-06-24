@@ -1,38 +1,36 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import CurrentUserContext from '../contexts/CurrentUserContext.js';
 import VectorLapiz  from '../images/profile/lapiz.svg';
 import VectorCruz  from '../images/profile/button-add.svg';
 import Card from './Card.js';
 
+
 function Main({ onEditProfileClick, 
                 onAddPlaceClick, 
                 onEditAvatarClick, 
-                onCardClick, 
+                onCardClick,
+                onCardLike,
                 cards, 
-                userId, 
-                api, 
-                userAvatar, 
-                userName, 
-                userDescription, 
                 onConfirmationDelete }) {
-    
+    const currentUser = useContext(CurrentUserContext);
     return (
         <>
             <section className="profile">
                 <div className="profile__avatar">
                     <div className="profile__elipce">
                         <div className="profile__image-edit">
-                            <img className="profile__edit-image-button-vector" src={VectorLapiz} onClick={onEditAvatarClick}/>
+                            <img className="profile__edit-image-button-vector" src={VectorLapiz} onClick={onEditAvatarClick} alt="Edit Avatar"/>
                         </div>
-                        <img className="profile__image"  style={{ backgroundImage: `url(${userAvatar})` }}/>
+                        <img className="profile__image"  style={{ backgroundImage: `url(${currentUser.avatar})` }}/>
                     </div>
                 </div>
                 <div className="profile__into">
-                    <h2 className="profile__title">{userName}</h2>
+                    <h2 className="profile__title">{currentUser.name}</h2>
                     <div className="profile__edit-button-square profile__edit-button-square_grey" onClick={onEditProfileClick}> </div>
                     <div className="profile__edit-button-square" id="edit-button">
                         <img className="profile__edit-button-vector" src={VectorLapiz} alt="imagen de silueta de lapiz"/>
                     </div>
-                    <h3 className="profile__subtitle">{userDescription}</h3> 
+                    <h3 className="profile__subtitle">{currentUser.about}</h3> 
                 </div>
                 <div className="profile__add-button profile__add-button_grey" onClick={onAddPlaceClick}> </div>
                 <div className="profile__add-button profile__add-button:hover">
@@ -42,20 +40,15 @@ function Main({ onEditProfileClick,
 
             <section className="cards">
                 
-                {cards.map((cardItem) => {
-                    const canBeDelete = cardItem.owner._id === userId;
-                    console.log('CardItem:', cardItem);
-                    console.log('CanBeDelete:', canBeDelete);
-                    return(<Card
+                {cards.map((cardItem) => (
+                    <Card
                         key={cardItem._id}
-                        canBeDelete= {canBeDelete}
                         card={cardItem}
-                        api={api}
-                        userId={userId}
+                        onCardLike={onCardLike}
                         onConfirmationDelete={onConfirmationDelete} 
                         handleCardClick={onCardClick}
-                    />)
-                })}
+                    />
+                ))}
             </section>
 
         </>
