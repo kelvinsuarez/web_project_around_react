@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 
-function PopupWithForm(props) {
+function PopupWithForm( props ) {
     useEffect(() =>{
        const handleEscClose = (evt) => {
             if (evt.key == 'Escape'){
@@ -20,12 +20,12 @@ function PopupWithForm(props) {
             document.removeEventListener("keydown", handleEscClose);
             document.removeEventListener("click", handleClickOutside);
         }
-    }, [props])
+    }, [props.onClose, props.name])
     return (
         <div className={`popup${props.name} ${props.isOpen ? "popup-opened" : ""} form`} id={props.id}>
             <div className={`popup${props.name}__group`}>
                 <h2 className={`popup${props.name}__icon-close popup${props.name}__icon-close:hover`} onClick={props.onClose}>+</h2>
-                <form name={props.name} className={`popup${props.name}__container form-popup`} noValidate>
+                <form name={props.name} className={`popup${props.name}__container form-popup`} noValidate onSubmit={props.onSubmit}>
                     <h2 className={`popup${props.name}__text`} >{props.title}</h2>
                     {props.children}
                 </form>

@@ -46,14 +46,14 @@ class Api{
         }
     }
 
-    async saveDataToServer(name, job) {
+    async saveDataToServer(name, description) {
         try{
             const res = await this._useFetch(
                 `${this._address}/v1/${this._groupId}/users/me`,
                 "PATCH",
                 {
                     name,
-                    about: job,
+                    about: description,
                 }
             );
             return res;

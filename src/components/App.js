@@ -6,6 +6,7 @@ import PopupWithForm from './PopupWithForm';
 import ImagePopup from './ImagePopup';
 import {api} from '../utils/api.js'
 import CurrentUserContext from '../contexts/CurrentUserContext.js';
+import EditProfilePopup from './EditProfilePopup.js';
 
 
 
@@ -42,7 +43,7 @@ function App() {
   }
 
   const handleEditProfileClick = () => {
-    setIsEditProfilePopupOpen(false)
+    setIsEditProfilePopupOpen(false);
   }
 
   const handleAddPlaceClick = () => {
@@ -64,7 +65,7 @@ function App() {
     setIsEditProfilePopupOpen(true);
     setIsAddPlacePopupOpen(true);
     setIsConfirmacionPopupOpen(true);
-    setIsOpenImagePopup(true)
+    setIsOpenImagePopup(true);
   }
 
 
@@ -86,6 +87,16 @@ function App() {
       );
     } catch (err) {
       console.log(err);
+    }
+  };
+
+  const handleUpdateUser = async (userData) => {
+    try {
+      const updataUser = await api.saveDataToServer(userData.name, userData.about);
+      setCurrentUser(updataUser);
+      closeAllPopups();
+    } catch (err) {
+      console.error("Error updating user data:", err);
     }
   };
 
@@ -141,33 +152,11 @@ function App() {
     <button className="popup-save popup-image-profile__button-save popup-image-profile__button-save:hover">Guardar</button>
   </PopupWithForm>
 
-  <PopupWithForm isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} name="-profile" id="popup-profile_container" title="Editar Perfil">
-    <input 
-      type="text" 
-      id="nombre"
-      name="nombre"
-      placeholder="Nombre" 
-      defaultValue={currentUser.name}
-      minLength="2" maxLength="40" 
-      className="popup-profile__imput-text popup-profile__imput-text_name form__imput-text"
-      required
-      autoComplete="off"
-    />
-    <span className="nombre-error form__input-show-error"></span>
-    <input 
-      type="text" 
-      id="acerca"
-      name="acerca"
-      placeholder="A cerca de mi"
-      defaultValue={currentUser.about}
-      minLength="2" maxLength="200"
-      className="popup-profile__imput-text popup-profile__imput-text_job form__imput-text"
-      required
-      autoComplete="off"
-    />
-    <span className="acerca-error form__input-show-error"></span>
-    <button className="popup-save popup-profile__button-save popup-profile__button-save:hover" id="button-save">Guardar</button>
-  </PopupWithForm>
+  <EditProfilePopup 
+    isOpen={isEditProfilePopupOpen} 
+    onClose={closeAllPopups}
+    onUpdateUser={handleUpdateUser}
+  />
 
   <PopupWithForm isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} name="-place" id="popup-place_container" title="Nuevo Lugar">
     <input 
