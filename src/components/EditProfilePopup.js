@@ -23,7 +23,7 @@ function EditProfilePopup (prosp){
     }
 
     const handleSubmit = (e) => {
-        e.preventDefoult();
+        e.preventDefault();
         prosp.onUpdateUser({
             name,
             about: description,
@@ -44,7 +44,7 @@ return(
       id="nombre"
       name="nombre"
       placeholder="Nombre" 
-      value={name}
+      defaultValue={name}
       minLength="2" 
       maxLength="40" 
       className="popup-profile__imput-text popup-profile__imput-text_name form__imput-text"
@@ -58,7 +58,7 @@ return(
       id="acerca"
       name="acerca"
       placeholder="A cerca de mi"
-      value={description}
+      defaultValue={description}
       minLength="2" 
       maxLength="200"
       className="popup-profile__imput-text popup-profile__imput-text_job form__imput-text"
