@@ -7,6 +7,7 @@ import ImagePopup from './ImagePopup';
 import {api} from '../utils/api.js'
 import CurrentUserContext from '../contexts/CurrentUserContext.js';
 import EditProfilePopup from './EditProfilePopup.js';
+import EditAvatarPopup from './EditAvatarPopup.js'
 
 
 
@@ -100,6 +101,16 @@ function App() {
     }
   };
 
+  const handleUpdateAvatar = async (avatar) => {
+    try {
+      const updateAvatar = await api.updateImageProfile(avatar);
+      setCurrentUser(updateAvatar)
+      closeAllPopups();
+    } catch (err) {
+      console.error("Error updating avatar pic:", err);
+    }
+  };
+
   return (
     <CurrentUserContext.Provider value ={currentUser}>
       <div className="App">
@@ -137,20 +148,11 @@ function App() {
     <button className="popup-confirmation__button-delete" onClick={handleCardDelete}>si</button>
   </PopupWithForm>
 
-  <PopupWithForm isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} name="-image-profile" id="popup-image-profile_container" title="Cambiar foto de perfil">
-    <input 
-      type="url"
-      id="url-profile"
-      placeholder="Imagen URL"
-      minLength="2" maxLength="200"
-      defaultValue=""
-      className="popup-image-profile__imput-text form-imput-text"
-      required
-      autoComplete="off"
-    />
-    <span className="url-profile-error form-input-show-error"></span>
-    <button className="popup-save popup-image-profile__button-save popup-image-profile__button-save:hover">Guardar</button>
-  </PopupWithForm>
+  <EditAvatarPopup 
+    isOpen={isEditAvatarPopupOpen} 
+    onClose={closeAllPopups} 
+    onUpdateAvatar={handleUpdateAvatar}
+  />
 
   <EditProfilePopup 
     isOpen={isEditProfilePopupOpen} 
