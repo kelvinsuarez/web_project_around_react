@@ -7,7 +7,8 @@ import ImagePopup from './ImagePopup';
 import {api} from '../utils/api.js'
 import CurrentUserContext from '../contexts/CurrentUserContext.js';
 import EditProfilePopup from './EditProfilePopup.js';
-import EditAvatarPopup from './EditAvatarPopup.js'
+import EditAvatarPopup from './EditAvatarPopup.js';
+import AddPlacePopup from './AddPlacePopup.js'
 
 
 
@@ -111,6 +112,16 @@ function App() {
     }
   };
 
+  const handleAddCard = async (card) => {
+    try{
+      const addCard = await api.addNewCardToServer(card);
+      setCards([addCard, ...cards]);
+      closeAllPopups();
+    } catch (err) {
+      console.error("Error updating new card:", err);
+    }
+  };
+
   return (
     <CurrentUserContext.Provider value ={currentUser}>
       <div className="App">
@@ -160,30 +171,11 @@ function App() {
     onUpdateUser={handleUpdateUser}
   />
 
-  <PopupWithForm isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} name="-place" id="popup-place_container" title="Nuevo Lugar">
-    <input 
-      type="text"
-      id="titulo"
-      placeholder="Titulo"
-      minLength="2" maxLength="30"
-      defaultValue=""
-      className="popup-place__imput-text popup-place__imput-text_title form-imput-text"
-      required
-      autoComplete="off"
-    />
-    <span className="titulo-error form-input-show-error"></span>
-    <input type="url"
-      id="url"
-      placeholder="Imagen URL"
-      minLength="2" maxLength="200"
-      defaultValue=""
-      className="popup-place__imput-text popup-place__imput-text_image form-imput-text"
-      required
-      autoComplete="off"
-    />
-    <span className="url-error form-input-show-error"></span>
-    <button className="popup-save popup-place__button-save popup-place__button-save:hover">Guardar</button>
-  </PopupWithForm>
+  <AddPlacePopup
+    isOpen={isAddPlacePopupOpen}
+    onClose={closeAllPopups}
+    onAddCard={handleAddCard}
+  />
 
 </div>
 
