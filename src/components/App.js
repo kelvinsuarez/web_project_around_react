@@ -2,13 +2,13 @@ import React, { useEffect} from 'react';
 import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
-import PopupWithForm from './PopupWithForm';
 import ImagePopup from './ImagePopup';
 import {api} from '../utils/api.js'
 import CurrentUserContext from '../contexts/CurrentUserContext.js';
 import EditProfilePopup from './EditProfilePopup.js';
 import EditAvatarPopup from './EditAvatarPopup.js';
-import AddPlacePopup from './AddPlacePopup.js'
+import AddPlacePopup from './AddPlacePopup.js';
+import ConfirmationDeletePopup from './ConfirmationDeletePopup.js';
 
 
 
@@ -74,7 +74,7 @@ function App() {
   const handleCardDelete = async () => {
     try {
       await api.deleteCardFromServer(selectedCard._id);
-      
+      setCards(cards.filter((card) => card._id !== selectedCard._id));
       closeAllPopups();
     } catch (error) {
       console.error ("error deleting card", error);
@@ -148,16 +148,11 @@ function App() {
     
   />
 
-  <PopupWithForm 
-    isOpen={isConfirmacionPopupOpen} 
-    onClose={closeAllPopups} 
-    name="-confirmation" 
-    id="" 
-    title="¿Estas seguro/a?"
-  
-  >
-    <button className="popup-confirmation__button-delete" onClick={handleCardDelete}>si</button>
-  </PopupWithForm>
+  <ConfirmationDeletePopup
+    isOpen={isConfirmacionPopupOpen}
+    onClose={closeAllPopups}
+    onUpdateDelete={handleCardDelete}
+  />
 
   <EditAvatarPopup 
     isOpen={isEditAvatarPopupOpen} 

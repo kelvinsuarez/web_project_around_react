@@ -62,7 +62,7 @@ class Api{
         }
     }
 
-    async addNewCardToServer(name, link) {
+    async addNewCardToServer({name, link}) {
         try {
             const res = await this._useFetch(
                `${this._address}/v1/${this._groupId}/cards`,
