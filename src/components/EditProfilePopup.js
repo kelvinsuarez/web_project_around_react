@@ -1,11 +1,13 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useContext, useRef} from "react";
 import PopupWithForm from "./PopupWithForm";
 import CurrentUserContext from "../contexts/CurrentUserContext";
+import FormValidator from "../utils/FormValidator";
 
 function EditProfilePopup (props){
     const currentUser = useContext(CurrentUserContext);
     const [name, setName] = useState(currentUser.name);
     const [description, setDescription] = useState(currentUser.about);
+    const formRef =  useRef(null);
 
     useEffect(() => {
         if (currentUser) {
@@ -13,6 +15,18 @@ function EditProfilePopup (props){
             setDescription(currentUser.about);
         }
     }, [currentUser, props.isOpen]);
+
+    useEffect(() => {
+        const formValidator = new FormValidator({
+            inputSelector: ".form-imput-text",
+            submitButtonSelector: ".popup-save",
+            buttonSaveOff: "popup__button-save-off",
+            inputErrorClass: "form__input-text_type_error",
+            errorClass: "form-input-show-error"
+        }, formRef.current);
+        formValidator.enableValidation();
+        
+    }, [props.isOpen]);
 
     const handleNameChange = (e) => {
         setName(e.target.value);
@@ -32,6 +46,7 @@ function EditProfilePopup (props){
 return(
     
     <PopupWithForm 
+        ref={formRef}
         isOpen={props.isOpen} 
         onClose={props.onClose} 
         name="-profile" 
@@ -67,7 +82,7 @@ return(
       onChange={handleDescriptionChange}
     />
     <span className="acerca-error form__input-show-error"></span>
-    <button className="popup-save popup-profile__button-save popup-profile__button-save:hover" id="button-save">Guardar</button>
+    <button className="popup-save popup-profile__button-save popup-profile__button-save:hover" id="button-save" disabled>Guardar</button>
   </PopupWithForm>
     
 )
