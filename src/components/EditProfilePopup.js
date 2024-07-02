@@ -18,9 +18,9 @@ function EditProfilePopup (props){
 
     useEffect(() => {
         const formValidator = new FormValidator({
-            inputSelector: ".form-imput-text",
+            inputSelector: ".form__imput-text",
             submitButtonSelector: ".popup-save",
-            buttonSaveOff: "popup__button-save-off",
+            buttonSaveOff: "popup-profile__button-save-off",
             inputErrorClass: "form__input-text_type_error",
             errorClass: "form-input-show-error"
         }, formRef.current);
