@@ -126,10 +126,10 @@ function App() {
     <CurrentUserContext.Provider value ={currentUser}>
       <div className="App">
 
-      <div className="root">
-        < Header />
+        <div className="root">
+          < Header />
   
-        < Main 
+          < Main 
           onEditProfileClick={handleEditProfileClick} 
           onAddPlaceClick={handleAddPlaceClick} 
           onEditAvatarClick={handleEditAvatarClick}
@@ -137,44 +137,42 @@ function App() {
           cards={cards}
           onConfirmationDelete={handleConfirmationClick}
           onCardLike={handleCardLike}
-  />
+          />
 
-  <Footer/>
+          <Footer/>
 
-  <ImagePopup
-    isOpen={isOpenImagePopup}
-    card={selectedCard}
-    onClose={closeAllPopups}
-    
-  />
+          <ImagePopup
+          isOpen={isOpenImagePopup}
+          card={selectedCard}
+          onClose={closeAllPopups}
+         />
 
-  <ConfirmationDeletePopup
-    isOpen={isConfirmacionPopupOpen}
-    onClose={closeAllPopups}
-    onUpdateDelete={handleCardDelete}
-  />
+          <ConfirmationDeletePopup
+          isOpen={isConfirmacionPopupOpen}
+          onClose={closeAllPopups}
+          onUpdateDelete={handleCardDelete}
+          />
 
-  <EditAvatarPopup 
-    isOpen={isEditAvatarPopupOpen} 
-    onClose={closeAllPopups} 
-    onUpdateAvatar={handleUpdateAvatar}
-  />
+          <EditAvatarPopup 
+          isOpen={isEditAvatarPopupOpen} 
+          onClose={closeAllPopups} 
+          onUpdateAvatar={handleUpdateAvatar}
+          />
 
-  <EditProfilePopup 
-    isOpen={isEditProfilePopupOpen} 
-    onClose={closeAllPopups}
-    onUpdateUser={handleUpdateUser}
-  />
+          <EditProfilePopup 
+          isOpen={isEditProfilePopupOpen} 
+          onClose={closeAllPopups}
+          onUpdateUser={handleUpdateUser}
+          />
 
-  <AddPlacePopup
-    isOpen={isAddPlacePopupOpen}
-    onClose={closeAllPopups}
-    onAddCard={handleAddCard}
-  />
+          <AddPlacePopup
+          isOpen={isAddPlacePopupOpen}
+          onClose={closeAllPopups}
+          onAddCard={handleAddCard}
+          />
+        </div>
 
-</div>
-
-</div>
+      </div>
     </CurrentUserContext.Provider>
   );
 }

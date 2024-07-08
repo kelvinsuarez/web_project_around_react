@@ -1,70 +1,113 @@
-# Getting Started with Create React App
+# web_project_around_react
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+### Descripción
 
-In the project directory, you can run:
+`web_project_around_react` es una aplicación web interactiva creada con React. Permite a los usuarios ver, agregar y eliminar tarjetas de lugares interesantes, así como actualizar su perfil y avatar. La aplicación se comunica con una API para gestionar los datos en el servidor.
 
-### `npm start`
+### Enlace a la Página
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Puedes ver la aplicación en vivo [aquí](https://kelvinsuarez.github.io/web_project_around_react/).
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Características Principales
 
-### `npm test`
+- Visualización de tarjetas con imágenes y descripciones.
+- Funcionalidad para agregar nuevas tarjetas.
+- Eliminación de tarjetas existentes.
+- Actualización del perfil del usuario.
+- Actualización del avatar del usuario.
+- Validación de formularios para asegurar entradas correctas.
+- Interacción con una API para persistencia de datos.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Tecnologías Utilizadas
 
-### `npm run build`
+- React
+- JavaScript
+- HTML
+- CSS
+- API REST
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Instalación
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. Clona el repositorio en tu máquina local:
+    ```sh
+    git clone https://github.com/kelvinsuarez/web_project_around_react.git
+    ```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+2. Navega al directorio del proyecto:
+    ```sh
+    cd web_project_around_react
+    ```
 
-### `npm run eject`
+3. Instala las dependencias necesarias:
+    ```sh
+    npm install
+    ```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Uso
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+1. Inicia el servidor de desarrollo:
+    ```sh
+    npm start
+    ```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+2. Abre tu navegador web y ve a `http://localhost:3000` para ver la aplicación en acción.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Estructura del Proyecto
 
-## Learn More
+El proyecto sigue la siguiente estructura de directorios:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```plaintext
+web_project_around_react/
+├── public/
+│   ├── index.html
+│   └── ...
+├── src/
+│   ├── components/
+│   │   ├── AddPlacePopup.js
+│   │   ├── App.js
+│   │   ├── Card.js
+│   │   ├── ConfirmationDeletePopup.js
+│   │   ├── EditAvatarPopup.js
+│   │   ├── EditProfilePopup.js
+│   │   ├── Footer.js
+│   │   ├── Header.js
+│   │   ├── ImagePopup.js
+│   │   ├── Main.js
+│   │   └── PopupWithForm.js
+│   ├── contexts/
+│   │   └── CurrentUserContext.js
+│   ├── utils/
+│   │   ├── api.js
+│   │   └── FormValidator.js
+│   ├── index.js
+│   └── ...
+├── .gitignore
+├── package.json
+├── README.md
+└── ...
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+API
+La aplicación interactúa con una API para realizar las siguientes operaciones:
 
-### Code Splitting
+Obtener información del usuario
+Actualizar información del usuario
+Actualizar el avatar del usuario
+Obtener tarjetas
+Agregar una nueva tarjeta
+Eliminar una tarjeta
+Dar "me gusta" a una tarjeta
+Quitar "me gusta" a una tarjeta
+Contribuciones
+Si deseas contribuir al proyecto, por favor sigue los siguientes pasos:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Haz un fork del repositorio.
+Crea una nueva rama (git checkout -b feature/nueva-caracteristica).
+Realiza tus cambios y haz commit (git commit -am 'Agrega nueva característica').
+Sube los cambios a tu rama (git push origin feature/nueva-caracteristica).
+Abre un Pull Request.
 
-### Analyzing the Bundle Size
+Licencia
+Este proyecto está bajo la licencia MIT. Consulta el archivo LICENSE para más detalles.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+¡Gracias por visitar este proyecto! Si tienes alguna pregunta o sugerencia, no dudes en contactarme.
